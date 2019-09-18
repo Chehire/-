@@ -19,9 +19,9 @@ namespace DryCleaning
             this.TopMost = true; //Вызов окна поверх других
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
-            ////this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
-            ////Icon iconForm = new Icon(Application.StartupPath + "\\img\\icoApp.ico");
-            //Icon = iconForm;
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
+            Icon iconForm = new Icon(Application.StartupPath + "\\img\\DryCleaning.ico");
+            Icon = iconForm;
             UpdateForm();
         }
 

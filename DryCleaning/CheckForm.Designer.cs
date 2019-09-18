@@ -233,7 +233,6 @@
             this.mtbDate.Name = "mtbDate";
             this.mtbDate.Size = new System.Drawing.Size(166, 26);
             this.mtbDate.TabIndex = 43;
-            this.mtbDate.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbDate_MaskInputRejected);
             // 
             // CheckForm
             // 

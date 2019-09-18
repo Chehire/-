@@ -21,8 +21,8 @@ namespace DryCleaning
         public MainForm()
         {
             InitializeComponent();//Добавление иконки приложения
-            //Icon iconForm = new Icon(Application.StartupPath + "\\img\\icoApp.ico");
-            //Icon = iconForm;
+            Icon iconForm = new Icon(Application.StartupPath + "\\img\\DryCleaning.ico");
+            Icon = iconForm;
             this.Text = "Dry Cleaning";
             DataGridLocation();
             Dolj();
@@ -63,11 +63,11 @@ namespace DryCleaning
 
         private void Dolj()
         {
-            if (Program.ID_Dolj == 1) //Администратор
+            if (Program.ID_Dolj == 2) //Администратор
             {
                 Restriction();
             }
-            if (Program.ID_Dolj == 2) //Генеральный директор
+            if (Program.ID_Dolj == 1) //Генеральный директор
             {
                 Restriction();
             }
@@ -113,14 +113,16 @@ namespace DryCleaning
 
         private void Restriction()
         {
-            checkToolStripMenuItem.Visible = true;
             doljToolStripMenuItem.Visible = true;
-            serviceToolStripMenuItem.Visible = true;
-            cardToolStripMenuItem.Visible = true;
-            companyToolStripMenuItem.Visible = true;
-            licenziatToolStripMenuItem.Visible = true;
-            licenziaToolStripMenuItem.Visible = true;
             employeeListToolStripMenuItem.Visible = true;
+            clientToolStripMenuItem.Visible = true;
+            serviceToolStripMenuItem.Visible = true;
+            checkToolStripMenuItem.Visible = true;
+            companyToolStripMenuItem.Visible = true;
+            cardToolStripMenuItem.Visible = true;
+            licenziatToolStripMenuItem.Visible = true;
+            licenziaToolStripMenuItem.Visible = true;   
+            licdocToolStripMenuItem.Visible = true;
         }
 
         private void DataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -185,6 +187,11 @@ namespace DryCleaning
         private void LicenziaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowLicenzia();
+        }
+
+        private void licdocToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLicDoc();
         }
 
         private void CheckToolStripMenuItem_Click(object sender, EventArgs e)
@@ -327,11 +334,11 @@ namespace DryCleaning
         {
             try
             {
-                this.Text = "DryCleaning  | Лицензионные договора";
+                this.Text = "DryCleaning | Лицензионные договора";
                 var sqlConnect = database.DatabaseSQL();
                 using (sqlConnect)
                 {
-
+                    dataGridView1.DataSource = database.TableFill("select * from [dbo].[View_LicDoc]", sqlConnect).Tables[0];
                 }
             }
             catch { }
@@ -371,6 +378,8 @@ namespace DryCleaning
                 if (this.Text == "DryCleaning | Список сотрудников")
                 {
                     SigUpForm Employee = new SigUpForm();
+                    Employee.btnUpdate.Enabled = false;
+                    Employee.btnDelete.Enabled = false;
                     Employee.ShowDialog();
                 }
                 if (this.Text == "DryCleaning | Карты учета НМА")
@@ -390,8 +399,8 @@ namespace DryCleaning
                 if (this.Text == "DryCleaning | Клиенты")
                 {
                     ClientForm Client = new ClientForm();
-                    Client.button2.Enabled = false;
-                    Client.button3.Enabled = false;
+                    Client.btnUpdate.Enabled = false;
+                    Client.btnDelete.Enabled = false;
                     Client.ShowDialog();
                 }
                 if (this.Text == "DryCleaning | Лицензиаты")
@@ -408,9 +417,12 @@ namespace DryCleaning
                     Licenzia.btnDelete.Enabled = false;
                     Licenzia.ShowDialog();
                 }
-                if (this.Text == "DryCleaning  | Лицензионные договора")
+                if (this.Text == "DryCleaning | Лицензионные договора")
                 {
-
+                    LicDocForm LicDoc = new LicDocForm();
+                    LicDoc.btnUpdate.Enabled = false;
+                    LicDoc.btnDelete.Enabled = false;
+                    LicDoc.ShowDialog();
                 }
             }
             catch { }
@@ -453,9 +465,9 @@ namespace DryCleaning
                     Employee.mtbSer.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
                     Employee.mtbNum.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
                     Employee.cbDolj.Text= dataGridView1.CurrentRow.Cells[6].Value.ToString();
-                    Employee.mtbNaim.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+                    Employee.dtpNaim.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells[8].Value);
                     Employee.mtbYvol.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
-                    Employee.btnOk.Enabled = false;
+                    Employee.btnAdd.Enabled = false;
                     Employee.ShowDialog();
                 }
                 try
@@ -512,7 +524,7 @@ namespace DryCleaning
                     Client.tbName.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                     Client.tbOtch.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                     Client.mtbNum.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                    Client.button1.Enabled = false;
+                    Client.btnAdd.Enabled = false;
                     Client.ShowDialog();
                 }
                 if (this.Text == "DryCleaning | Лицензиаты")
@@ -538,9 +550,11 @@ namespace DryCleaning
                     Licenzia.btnAdd.Enabled = false;
                     Licenzia.ShowDialog();
                 }
-                if (this.Text == "DryCleaning  | Лицензионные договора")
+                if (this.Text == "DryCleaning | Лицензионные договора")
                 {
-
+                    LicDocForm licDoc = new LicDocForm();
+                    licDoc.btnAdd.Enabled = false;
+                    licDoc.ShowDialog();
                 }
             }
             catch { }
@@ -590,7 +604,7 @@ namespace DryCleaning
                         case "DryCleaning | Список сотрудников":
                             dataGridView1.DataSource = database.TableFill($"select * from [dbo].[View_Sotr] where [Фамилия]+' '+[Имя]+' '+[Отчество] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
-                        case "DryCleaning  | Лицензионные договора":
+                        case "DryCleaning | Лицензионные договора":
                             //
                             break;
                     }
@@ -657,7 +671,7 @@ namespace DryCleaning
                         case "DryCleaning | Список сотрудников":
                             ShowFillEmployeeList();
                             break;
-                        case "DryCleaning  | Лицензионные договора":
+                        case "DryCleaning | Лицензионные договора":
                             ShowLicDoc();
                             break;
                     }
@@ -766,7 +780,7 @@ namespace DryCleaning
                         Export_Data_To_Word(dataGridView1, sfd.FileName, "Список сотрудников");
                     }
                     break;
-                case "DryCleaning  | Лицензионные договора":
+                case "DryCleaning | Лицензионные договора":
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
                         Export_Data_To_Word(dataGridView1, sfd.FileName, "Список лицензионных договоров");
@@ -847,7 +861,7 @@ namespace DryCleaning
                     }
 
                     //table style 
-                    oDoc.Application.Selection.Tables[1].set_Style("Классическая таблица 2");
+                    oDoc.Application.Selection.Tables[1].set_Style("Классическая таблица 1");
                     oDoc.Application.Selection.Tables[1].Rows[1].Select();
                     oDoc.Application.Selection.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 

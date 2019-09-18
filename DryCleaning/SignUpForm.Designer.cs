@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblYvol = new System.Windows.Forms.Label();
             this.cbDolj = new System.Windows.Forms.ComboBox();
@@ -40,7 +40,6 @@
             this.tbPas = new System.Windows.Forms.TextBox();
             this.mtbNaim = new System.Windows.Forms.MaskedTextBox();
             this.lblLogin = new System.Windows.Forms.Label();
-            this.dtpYvol = new System.Windows.Forms.DateTimePicker();
             this.lblRepPas = new System.Windows.Forms.Label();
             this.dtpNaim = new System.Windows.Forms.DateTimePicker();
             this.mtbYvol = new System.Windows.Forms.MaskedTextBox();
@@ -57,32 +56,33 @@
             this.tbFam = new System.Windows.Forms.TextBox();
             this.lblFam = new System.Windows.Forms.Label();
             this.tcSotr = new System.Windows.Forms.TabControl();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tcSotr.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnClose
+            // btnDelete
             // 
-            this.btnClose.Location = new System.Drawing.Point(290, 379);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(102, 30);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Закрыть";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.Button2_Click);
+            this.btnDelete.Location = new System.Drawing.Point(290, 379);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(102, 30);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnOk
+            // btnAdd
             // 
-            this.btnOk.Location = new System.Drawing.Point(11, 379);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(102, 30);
-            this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.Button1_Click);
+            this.btnAdd.Location = new System.Drawing.Point(11, 379);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(102, 30);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Добавить";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // tabPage2
             // 
@@ -95,7 +95,6 @@
             this.tabPage2.Controls.Add(this.tbPas);
             this.tabPage2.Controls.Add(this.mtbNaim);
             this.tabPage2.Controls.Add(this.lblLogin);
-            this.tabPage2.Controls.Add(this.dtpYvol);
             this.tabPage2.Controls.Add(this.lblRepPas);
             this.tabPage2.Controls.Add(this.dtpNaim);
             this.tabPage2.Controls.Add(this.mtbYvol);
@@ -189,14 +188,6 @@
             this.lblLogin.TabIndex = 23;
             this.lblLogin.Text = "Логин";
             // 
-            // dtpYvol
-            // 
-            this.dtpYvol.Location = new System.Drawing.Point(193, 285);
-            this.dtpYvol.Name = "dtpYvol";
-            this.dtpYvol.Size = new System.Drawing.Size(178, 26);
-            this.dtpYvol.TabIndex = 34;
-            this.dtpYvol.ValueChanged += new System.EventHandler(this.dtpYvol_ValueChanged);
-            // 
             // lblRepPas
             // 
             this.lblRepPas.AutoSize = true;
@@ -218,7 +209,6 @@
             // mtbYvol
             // 
             this.mtbYvol.Location = new System.Drawing.Point(195, 253);
-            this.mtbYvol.Mask = "00/00/0000";
             this.mtbYvol.Name = "mtbYvol";
             this.mtbYvol.Size = new System.Drawing.Size(178, 26);
             this.mtbYvol.TabIndex = 37;
@@ -355,14 +345,26 @@
             this.tcSotr.Size = new System.Drawing.Size(385, 360);
             this.tcSotr.TabIndex = 1;
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(142, 379);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(102, 30);
+            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.Text = "Изменить";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // SigUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 419);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.tcSotr);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnAdd);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SigUpForm";
             this.Text = "Регистрация";
@@ -376,8 +378,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label lblDolj;
         private System.Windows.Forms.Label lblLogin;
@@ -390,11 +390,9 @@
         private System.Windows.Forms.Label lblOtch;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblFam;
-        private System.Windows.Forms.DateTimePicker dtpYvol;
-        private System.Windows.Forms.DateTimePicker dtpNaim;
         private System.Windows.Forms.Label lblYvol;
         private System.Windows.Forms.Label lblNaim;
-        public System.Windows.Forms.Button btnOk;
+        public System.Windows.Forms.Button btnAdd;
         public System.Windows.Forms.ComboBox cbDolj;
         public System.Windows.Forms.TextBox tbLogin;
         public System.Windows.Forms.TextBox tbRepPas;
@@ -406,5 +404,8 @@
         public System.Windows.Forms.TextBox tbFam;
         public System.Windows.Forms.MaskedTextBox mtbYvol;
         public System.Windows.Forms.MaskedTextBox mtbNaim;
+        public System.Windows.Forms.Button btnUpdate;
+        public System.Windows.Forms.Button btnDelete;
+        public System.Windows.Forms.DateTimePicker dtpNaim;
     }
 }

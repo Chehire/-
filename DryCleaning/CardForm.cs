@@ -17,7 +17,12 @@ namespace DryCleaning
         string Sotr;
         public CardForm()
         {
+            this.TopMost = true;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
+            Icon iconForm = new Icon(Application.StartupPath + "\\img\\DryCleaning.ico");
+            Icon = iconForm;
             ShowComboBox();
         }
 

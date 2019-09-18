@@ -21,10 +21,15 @@ namespace DryCleaning
         public CheckForm()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
+            Icon iconForm = new Icon(Application.StartupPath + "\\img\\DryCleaning.ico");
+            Icon = iconForm;
             tbSum.Text = (Cena * nudKolichecstvo.Value).ToString();
             ShowComboBox();
             mtbDate.Text = dtpDate.Value.ToString();
         }
+
         private void ShowComboBox()
         {
             try
@@ -107,14 +112,8 @@ namespace DryCleaning
             mtbDate.Text = dtpDate.Value.ToString();
         }
 
-        private void mtbDate_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            Date = Convert.ToDateTime(mtbDate.Text);
-        }
-
         private void btnAddCheck_Click(object sender, EventArgs e)
-        {
-            
+        {           
             try
             {
                 var sqlConnect = database.DatabaseSQL();
@@ -127,7 +126,7 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Service_ID", Program.ID_Service);
                     sqlCommand.Parameters.AddWithValue("@Kolichestvo", nudKolichecstvo.Value);
                     sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt16(tbSum.Text));
-                    sqlCommand.Parameters.AddWithValue("@Date", Convert.ToDateTime(mtbDate.Text));
+                    sqlCommand.Parameters.AddWithValue("@Date", dtpDate.Value);
                     sqlCommand.Parameters.AddWithValue("@Client_ID", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
                 }
@@ -155,7 +154,7 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Service_ID", Program.ID_Service);
                     sqlCommand.Parameters.AddWithValue("@Kolichestvo", nudKolichecstvo.Value);
                     sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt16(tbSum.Text));
-                    sqlCommand.Parameters.AddWithValue("@Date", Convert.ToDateTime(mtbDate.Text)); 
+                    sqlCommand.Parameters.AddWithValue("@Date", dtpDate.Value); 
                     sqlCommand.Parameters.AddWithValue("@Client_ID", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
                 }

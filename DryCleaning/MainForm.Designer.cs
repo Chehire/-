@@ -48,6 +48,7 @@
             this.licenziaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenziatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licdocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ОбновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -55,7 +56,6 @@
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.licdocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -216,6 +216,13 @@
             this.licenziatToolStripMenuItem.Text = "Список лицензиатов";
             this.licenziatToolStripMenuItem.Click += new System.EventHandler(this.LicenziatToolStripMenuItem_Click);
             // 
+            // licdocToolStripMenuItem
+            // 
+            this.licdocToolStripMenuItem.Name = "licdocToolStripMenuItem";
+            this.licdocToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
+            this.licdocToolStripMenuItem.Text = "Список лицензионных договоров";
+            this.licdocToolStripMenuItem.Click += new System.EventHandler(this.licdocToolStripMenuItem_Click);
+            // 
             // ОбновитьToolStripMenuItem
             // 
             this.ОбновитьToolStripMenuItem.Name = "ОбновитьToolStripMenuItem";
@@ -275,12 +282,6 @@
             this.lblSearch.Size = new System.Drawing.Size(55, 20);
             this.lblSearch.TabIndex = 3;
             this.lblSearch.Text = "Поиск";
-            // 
-            // licdocToolStripMenuItem
-            // 
-            this.licdocToolStripMenuItem.Name = "licdocToolStripMenuItem";
-            this.licdocToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
-            this.licdocToolStripMenuItem.Text = "Список лицензионных договоров";
             // 
             // MainForm
             // 

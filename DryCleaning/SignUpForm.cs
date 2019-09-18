@@ -22,9 +22,11 @@ namespace DryCleaning
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
-            //Icon iconForm = new Icon(Application.StartupPath + "\\img\\icoApp.ico");
-            //Icon = iconForm;
-            this.Text = "Window Registration";
+            this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//Добавление иконки приложения
+            Icon iconForm = new Icon(Application.StartupPath + "\\img\\DryCleaning.ico");
+            Icon = iconForm;
+            this.Text = "Cотрудник";
             lblFam.Text = "Фамилия";
             lblName.Text = "Имя";
             lblOtch.Text = "Отчество";
@@ -34,8 +36,8 @@ namespace DryCleaning
             lblPassword.Text = "Пароль";
             lblRepPas.Text = "Повторите пароль";
             lblDolj.Text = "Должность";
-            btnOk.Text = "OK";
-            btnClose.Text = "Закрыть";
+            btnAdd.Text = "Добавить";
+            btnDelete.Text = "Удалить";
             tbPas.PasswordChar = '*';
             tbRepPas.PasswordChar = '*';
             ShowDolj();
@@ -71,16 +73,6 @@ namespace DryCleaning
             mtbNaim.Text = dtpNaim.Value.ToShortDateString();
         }
 
-        private void dtpYvol_ValueChanged(object sender, EventArgs e)
-        {
-            mtbYvol.Text = dtpYvol.Value.ToShortDateString();
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         //private string GetHash(string input) //Хэширование пароля в БД
         //{
         //    var md5 = MD5.Create();
@@ -88,21 +80,16 @@ namespace DryCleaning
         //    return Convert.ToBase64String(hash);
         //}
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddUsers();
-        }
-
-
-        private void AddUsers()
-        {
-
             try
             {
                 if (tbPas.Text == tbRepPas.Text)
                 {
                     var sqlConnection = database.DatabaseSQL();
                     string passwordHash = tbPas.Text;
+                    MessageBox.Show(mtbYvol.Text);
+                    MessageBox.Show(mtbNaim.Text);
                     using (sqlConnection)
                     {
                         sqlConnection.Open();
@@ -115,8 +102,53 @@ namespace DryCleaning
                         sqlCommand.Parameters.AddWithValue("@Num_Pas", mtbNum.Text);
                         sqlCommand.Parameters.AddWithValue("@Login_Sotr", tbLogin.Text);
                         sqlCommand.Parameters.AddWithValue("@Password_Sotr", passwordHash);
-                        sqlCommand.Parameters.AddWithValue("@Date_Naim", Convert.ToDateTime(mtbNaim.Text));
-                        sqlCommand.Parameters.AddWithValue("@Date_Uvol", Convert.ToDateTime(mtbYvol.Text));
+                        sqlCommand.Parameters.AddWithValue("@Date_Naim", Convert.ToDateTime(mtbNaim.Text).Date);
+                        sqlCommand.Parameters.AddWithValue("@Date_Uvol", mtbYvol.Text);
+                        sqlCommand.Parameters.AddWithValue("@Dolj_ID", Program.ID_Position);
+                        sqlCommand.ExecuteNonQuery();
+                        
+                    }
+                    MessageBox.Show("Сотрудник добавлен");
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Пароли не совпадают");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сотрудник не добавлен" + ex.Message);
+            }
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbPas.Text == tbRepPas.Text)
+                {
+                    var sqlConnection = database.DatabaseSQL();
+                    string passwordHash = tbPas.Text;
+                    MessageBox.Show(mtbYvol.Text);
+                    MessageBox.Show(mtbNaim.Text);
+                    using (sqlConnection)
+                    {
+                        sqlConnection.Open();
+                        var sqlCommand = new SqlCommand("Sotr_Update", sqlConnection);
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
+                        sqlCommand.Parameters.AddWithValue("@Fam_Sotr", tbFam.Text);
+                        sqlCommand.Parameters.AddWithValue("@Name_Sotr", tbName.Text);
+                        sqlCommand.Parameters.AddWithValue("@Otch_Sotr", tbOtch.Text);
+                        sqlCommand.Parameters.AddWithValue("@Ser_Pas", mtbSer.Text);
+                        sqlCommand.Parameters.AddWithValue("@Num_Pas", mtbNum.Text);
+                        //sqlCommand.Parameters.AddWithValue("@Login_Sotr", tbLogin.Text);
+                        //sqlCommand.Parameters.AddWithValue("@Password_Sotr", passwordHash);
+                        sqlCommand.Parameters.AddWithValue("@Date_Naim", Convert.ToDateTime(mtbNaim.Text).Date);
+                        sqlCommand.Parameters.AddWithValue("@Date_Uvol", mtbYvol.Text);
                         sqlCommand.Parameters.AddWithValue("@Dolj_ID", Program.ID_Position);
                         sqlCommand.ExecuteNonQuery();
                     }
@@ -126,15 +158,36 @@ namespace DryCleaning
                     MessageBox.Show("Пароли не совпадают");
                 }
 
-                MessageBox.Show("Сотрудник добавлен");
+                MessageBox.Show("Сотрудник изменен");
                 this.Hide();
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Сотрудник не добавлен" + ex.Message);
+                MessageBox.Show("Сотрудник не изменен " + ex.Message);
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var sqlConnect = database.DatabaseSQL();
+                using (sqlConnect)
+                {
+                    sqlConnect.Open();
+                    SqlCommand sqlCommand = new SqlCommand("Sotr_Delete", sqlConnect);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                MessageBox.Show("Сотрудник удален");
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сотрудник не удален " + ex.Message);
+            }
+        }
     }
 }
