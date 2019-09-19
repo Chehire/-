@@ -726,7 +726,7 @@ namespace DryCleaning
 
             switch (this.Text)
             {
-                case "DryCleaning | Чек":
+                case "DryCleaning | Чеки":
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
                         Export_Data_To_Word(dataGridView1, sfd.FileName, "Список чеков");
