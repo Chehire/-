@@ -36,7 +36,7 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Fam_Client", tbFam.Text);
                     sqlCommand.Parameters.AddWithValue("@Name_Client", tbName.Text);
                     sqlCommand.Parameters.AddWithValue("@Otch_Client", tbOtch.Text);
-                    sqlCommand.Parameters.AddWithValue("@Nomer_Client", mtbNum.Text);
+                    sqlCommand.Parameters.AddWithValue("@NomerClient", mtbNum.Text);
                     sqlCommand.ExecuteNonQuery();
                 }
                 MessageBox.Show("Клиент добавлен");
@@ -62,7 +62,7 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Fam_Client", tbFam.Text);
                     sqlCommand.Parameters.AddWithValue("@Name_Client", tbName.Text);
                     sqlCommand.Parameters.AddWithValue("@Otch_Client", tbOtch.Text);
-                    sqlCommand.Parameters.AddWithValue("@Nomer_Client", mtbNum.Text);
+                    sqlCommand.Parameters.AddWithValue("@NomerClient", mtbNum.Text);
                     sqlCommand.ExecuteNonQuery();
                 }
 
@@ -89,12 +89,12 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@ID_Client", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
                 }
-                MessageBox.Show("Сотрудник удален");
+                MessageBox.Show("Клиент удален");
                 this.Hide();
             }
             catch
             {
-                MessageBox.Show("Сотрудник не удален ");
+                MessageBox.Show("Клиент не удален ");
             }
         }
     }

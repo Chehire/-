@@ -60,7 +60,7 @@ namespace DryCleaning
                     sqlConnect.Open();
                     SqlCommand sqlCommand = new SqlCommand("Licenzii_Update", sqlConnect);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Licenzia", Program.ID_Licenzia);
+                    sqlCommand.Parameters.AddWithValue("@ID_Licenzia", Program.ID_Licenzia);
                     sqlCommand.Parameters.AddWithValue("@Licenzia_Name", tbLicenzia.Text);
                     sqlCommand.ExecuteNonQuery();
                 }

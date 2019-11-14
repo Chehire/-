@@ -121,6 +121,7 @@
             // tbCena
             // 
             this.tbCena.Location = new System.Drawing.Point(12, 248);
+            this.tbCena.MaxLength = 12;
             this.tbCena.Name = "tbCena";
             this.tbCena.Size = new System.Drawing.Size(426, 26);
             this.tbCena.TabIndex = 8;
@@ -163,7 +164,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(169, 332);
+            this.btnUpdate.Location = new System.Drawing.Point(174, 332);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(110, 37);
             this.btnUpdate.TabIndex = 14;

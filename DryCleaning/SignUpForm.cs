@@ -45,7 +45,7 @@ namespace DryCleaning
         }
 
         private void ShowDolj() //Вывод должности в comboBox
-        {
+        { 
             var sqlConnection = database.DatabaseSQL();
             using (sqlConnection)
             {
@@ -73,12 +73,12 @@ namespace DryCleaning
             mtbNaim.Text = dtpNaim.Value.ToShortDateString();
         }
 
-        //private string GetHash(string input) //Хэширование пароля в БД
-        //{
-        //    var md5 = MD5.Create();
-        //    var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
-        //    return Convert.ToBase64String(hash);
-        //}
+        private string GetHash(string input) //Хэширование пароля в БД
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            return Convert.ToBase64String(hash);
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -87,9 +87,7 @@ namespace DryCleaning
                 if (tbPas.Text == tbRepPas.Text)
                 {
                     var sqlConnection = database.DatabaseSQL();
-                    string passwordHash = tbPas.Text;
-                    MessageBox.Show(mtbYvol.Text);
-                    MessageBox.Show(mtbNaim.Text);
+                    string passwordHash = GetHash(tbPas.Text);
                     using (sqlConnection)
                     {
                         sqlConnection.Open();
@@ -131,9 +129,6 @@ namespace DryCleaning
                 if (tbPas.Text == tbRepPas.Text)
                 {
                     var sqlConnection = database.DatabaseSQL();
-                    string passwordHash = tbPas.Text;
-                    MessageBox.Show(mtbYvol.Text);
-                    MessageBox.Show(mtbNaim.Text);
                     using (sqlConnection)
                     {
                         sqlConnection.Open();

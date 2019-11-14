@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LicenziaForm));
             this.lblLicenzia = new System.Windows.Forms.Label();
             this.tbLicenzia = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@
             // 
             this.tbLicenzia.Location = new System.Drawing.Point(24, 62);
             this.tbLicenzia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbLicenzia.MaxLength = 50;
             this.tbLicenzia.Name = "tbLicenzia";
             this.tbLicenzia.Size = new System.Drawing.Size(370, 26);
             this.tbLicenzia.TabIndex = 1;
@@ -98,7 +100,7 @@
             this.Controls.Add(this.lblLicenzia);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LicenziaForm";
-            this.Text = "Лицензия";
+            this.Text = resources.GetString("$this.Text");
             this.ResumeLayout(false);
             this.PerformLayout();
 

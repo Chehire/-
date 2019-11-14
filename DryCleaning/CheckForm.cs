@@ -15,8 +15,6 @@ namespace DryCleaning
     {
         DatabaseConnection database = new DatabaseConnection();
         int Cena;
-        DateTime Date = new DateTime();
-        //int ID_Check;
 
         public CheckForm()
         {
@@ -41,11 +39,13 @@ namespace DryCleaning
                     cbFIOKas.DisplayMember = "FIOSotr";
                     cbService.DataSource = database.TableFill("select Service_Name as Service from Price_List", sqlConnect).Tables[0];
                     cbService.DisplayMember = "Service";
-                    cbFIOCln.DataSource = database.TableFill("select  [Fam_Client]+' '+[Name_Client]+' ' +[Otch_Client] as FIOCl from [dbo].[Client]", sqlConnect).Tables[0];
+                    cbFIOCln.DataSource = database.TableFill("select  [Fam_Client]+' '+[Name_Client]+' ' +[Otch_Client] +' '+ [Nomer_Client] as FIOCl from [dbo].[Client]", sqlConnect).Tables[0];
                     cbFIOCln.DisplayMember = "FIOCl";
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void cbFIOKas_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,6 +85,11 @@ namespace DryCleaning
             tbSum.Text = (Cena * nudKolichecstvo.Value).ToString();
         }
 
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            mtbDate.Text = dtpDate.Value.ToString();
+        }
+
         private void nudKolichecstvo_ValueChanged(object sender, EventArgs e)
         {
             tbSum.Text = (Cena * nudKolichecstvo.Value).ToString();
@@ -98,18 +103,13 @@ namespace DryCleaning
                 using (sqlConnect)
                 {
                     sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand($"select [ID_Client] from [dbo].[Client] where [Fam_Client]+' '+[Name_Client]+' ' +[Otch_Client] = '{cbFIOCln.Text}'", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand($"select [ID_Client] from [dbo].[Client] where [Fam_Client]+' '+[Name_Client]+' ' +[Otch_Client]+' '+[Nomer_Client] = '{cbFIOCln.Text}'", sqlConnect);
                     Program.ID_Client = (int)sqlCommand.ExecuteScalar();
                 }
             }
             catch
             {
             }
-        }
-
-        private void dtpDate_ValueChanged(object sender, EventArgs e)
-        {
-            mtbDate.Text = dtpDate.Value.ToString();
         }
 
         private void btnAddCheck_Click(object sender, EventArgs e)
@@ -125,8 +125,8 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Sotr_ID", Program.ID_Sotr);
                     sqlCommand.Parameters.AddWithValue("@Service_ID", Program.ID_Service);
                     sqlCommand.Parameters.AddWithValue("@Kolichestvo", nudKolichecstvo.Value);
-                    sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt16(tbSum.Text));
-                    sqlCommand.Parameters.AddWithValue("@Date", dtpDate.Value);
+                    sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt32(tbSum.Text));
+                    sqlCommand.Parameters.AddWithValue("@Date", Convert.ToDateTime(mtbDate.Text));
                     sqlCommand.Parameters.AddWithValue("@Client_ID", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
                 }
@@ -153,8 +153,8 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Sotr_ID", Program.ID_Sotr);
                     sqlCommand.Parameters.AddWithValue("@Service_ID", Program.ID_Service);
                     sqlCommand.Parameters.AddWithValue("@Kolichestvo", nudKolichecstvo.Value);
-                    sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt16(tbSum.Text));
-                    sqlCommand.Parameters.AddWithValue("@Date", dtpDate.Value); 
+                    sqlCommand.Parameters.AddWithValue("@Sum", Convert.ToInt32(tbSum.Text));
+                    sqlCommand.Parameters.AddWithValue("@Date", Convert.ToDateTime(mtbDate.Text)); 
                     sqlCommand.Parameters.AddWithValue("@Client_ID", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
                 }
@@ -189,6 +189,60 @@ namespace DryCleaning
             }
         }
 
+        private void btnAddClient_Click(object sender, EventArgs e)
+        {
+            ClientForm Client = new ClientForm();
+            Client.btnUpdate.Enabled = false;
+            Client.btnDelete.Enabled = false;
+            Client.ShowDialog();
+        }
+
+        private void btnUpdateClient_Click(object sender, EventArgs e)
+        {   
+            string FamCl = "",
+                   NameCl="",
+                   OtchCl="",
+                   NumCl="";
+            try
+            {
+                var sqlConnect = database.DatabaseSQL();
+                using (sqlConnect)
+                {
+                    sqlConnect.Open();
+                    SqlCommand sqlCommand = new SqlCommand($"select [ID_Client] from [dbo].[Client] where [Fam_Client]+' '+[Name_Client]+' ' +[Otch_Client] +' '+[Nomer_Client] = '{cbFIOCln.Text}'", sqlConnect);
+                    Program.ID_Client = (int)sqlCommand.ExecuteScalar();
+                    SqlCommand sqlFam = new SqlCommand($"select [Fam_Client] from [dbo].[Client] where [ID_Client] = '{Program.ID_Client.ToString()}'", sqlConnect);
+                    FamCl = (string)sqlFam.ExecuteScalar();
+                    SqlCommand sqlName = new SqlCommand($"select [Name_Client] from [dbo].[Client] where [ID_Client] = '{Program.ID_Client.ToString()}'", sqlConnect);
+                    NameCl = (string)sqlName.ExecuteScalar();
+                    SqlCommand sqlNum = new SqlCommand($"select [Nomer_Client] from [dbo].[Client] where [ID_Client] = '{Program.ID_Client.ToString()}'", sqlConnect);
+                    NumCl = (string)sqlNum.ExecuteScalar();
+                    SqlCommand sqlOtch = new SqlCommand($"select [Otch_Client] from [dbo].[Client] where [ID_Client] = '{Program.ID_Client.ToString()}'", sqlConnect);
+                    OtchCl = (string)sqlOtch.ExecuteScalar();
+                }
+            }
+            catch
+            {
+            }
+            ClientForm Client = new ClientForm();
+            Client.btnAdd.Enabled = false;
+            Client.btnUpdate.Enabled = true;
+            Client.btnDelete.Enabled = false;
+            Client.tbFam.Text = (FamCl);
+            Client.tbName.Text = (NameCl);
+            Client.tbOtch.Text = (OtchCl);
+            Client.mtbNum.Text = (NumCl);
+            Client.ShowDialog();
+        }
+
+        private void btnDeleteClient_Click(object sender, EventArgs e)
+        {
+            ClientForm Client = new ClientForm();
+            Client.btnAdd.Enabled = false;
+            Client.btnUpdate.Enabled = false;
+            Client.btnDelete.Enabled = true;
+            Client.ShowDialog();
+        }
     }
     
 }

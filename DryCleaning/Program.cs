@@ -28,9 +28,7 @@ namespace DryCleaning
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Zastavka());
-            //Application.Run(new MainForm());
-             Application.Run(new SignInForm());
-
+            Application.Run(new SignInForm());
         }
     }
 }

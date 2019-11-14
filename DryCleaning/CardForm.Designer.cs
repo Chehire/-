@@ -58,6 +58,7 @@
             // tbCena
             // 
             this.tbCena.Location = new System.Drawing.Point(12, 140);
+            this.tbCena.MaxLength = 7;
             this.tbCena.Name = "tbCena";
             this.tbCena.Size = new System.Drawing.Size(350, 26);
             this.tbCena.TabIndex = 1;
@@ -111,7 +112,7 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(7, 330);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(113, 28);
+            this.btnAdd.Size = new System.Drawing.Size(113, 36);
             this.btnAdd.TabIndex = 45;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -121,7 +122,7 @@
             // 
             this.btnUpdate.Location = new System.Drawing.Point(126, 330);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(121, 28);
+            this.btnUpdate.Size = new System.Drawing.Size(121, 36);
             this.btnUpdate.TabIndex = 46;
             this.btnUpdate.Text = "Изменить";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -131,7 +132,7 @@
             // 
             this.btnDelete.Location = new System.Drawing.Point(258, 330);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(104, 28);
+            this.btnDelete.Size = new System.Drawing.Size(104, 36);
             this.btnDelete.TabIndex = 47;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -159,6 +160,7 @@
             // 
             this.tbDolj.Location = new System.Drawing.Point(12, 298);
             this.tbDolj.Name = "tbDolj";
+            this.tbDolj.ReadOnly = true;
             this.tbDolj.Size = new System.Drawing.Size(350, 26);
             this.tbDolj.TabIndex = 48;
             // 

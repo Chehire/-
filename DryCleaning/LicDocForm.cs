@@ -148,7 +148,7 @@ namespace DryCleaning
                     sqlConnect.Open();
                     SqlCommand sqlCommand = new SqlCommand("LicDoc_Update", sqlConnect);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@ID_Doc", Program.ID_LicDoc);
+                    sqlCommand.Parameters.AddWithValue("@ID_LicDoc", Program.ID_LicDoc);
                     sqlCommand.Parameters.AddWithValue("@Sotr_ID", Program.ID_Sotr);
                     sqlCommand.Parameters.AddWithValue("@Organization_ID", Program.ID_Company);
                     sqlCommand.Parameters.AddWithValue("@Licenziat_ID", Program.ID_Licenziat);
@@ -176,7 +176,7 @@ namespace DryCleaning
                     sqlConnect.Open();
                     SqlCommand sqlCommand = new SqlCommand("LicDoc_Delete", sqlConnect);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@ID_Doc", Program.ID_Check);
+                    sqlCommand.Parameters.AddWithValue("@ID_LicDoc", Program.ID_Check);
                     sqlCommand.ExecuteNonQuery();
                 }
                 MessageBox.Show("Договор удален");

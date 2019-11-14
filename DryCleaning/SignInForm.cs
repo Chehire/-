@@ -9,8 +9,9 @@ namespace DryCleaning
 {
     public partial class SignInForm : Form
 {
-        DatabaseConnection DrySQL = new DatabaseConnection();
- 
+        DatabaseConnection DrySql = new DatabaseConnection();
+        //DataBase_Configuration data = new DataBase_Configuration();
+
         public SignInForm()
         { 
             InitializeComponent();
@@ -41,25 +42,24 @@ namespace DryCleaning
 
         private void CheckUsers()
         {
+            
             try
             {
                 string loginCheck = tbLogin.Text;
-                string passwordCheck = tbPassword.Text;
-                //string passwordCheck = GetHash(textBox2.Text);
+                string passwordCheck = GetHash(tbPassword.Text);
                 string checkCmd = $"Select [Login_Sotr], [Password_Sotr] from [dbo].[Sotr] where [Login_Sotr] = '{loginCheck}'  and [Password_Sotr] = '{passwordCheck}'";
                 string checkRole = $"Select [Dolj_ID] from [dbo].[Sotr] where [Login_Sotr] ='{loginCheck}'";
-                var sqlConnection = DrySQL.DatabaseSQL();
-                sqlConnection.Open();
-                using (sqlConnection)
+                var sqlconnection = DrySql.DatabaseSQL();
+                    sqlconnection.Open();
+                using (sqlconnection)
                 {
-                    //sqlConnection.Open();
-                    var command = new SqlCommand(checkCmd, sqlConnection);
-                    var commandRole = new SqlCommand(checkRole, sqlConnection);
+                    var command = new SqlCommand(checkCmd, sqlconnection);
+                    var commandRole = new SqlCommand(checkRole, sqlconnection);
                     command.Prepare();
                     command.ExecuteNonQuery();
                     if (loginCheck == (string)command.ExecuteScalar())
                     {
-
+                        
                         Program.ID_Dolj = (int)commandRole.ExecuteScalar();
                         MessageBox.Show("Авторизация успешна");
                         this.Hide();
@@ -79,12 +79,11 @@ namespace DryCleaning
 
         }
 
-        //private string GetHash(string input) //Хэширование пароля в БД
-        //{
-        //    var md5 = MD5.Create();
-        //    var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
-        //    return Convert.ToBase64String(hash);
-        //}
-
+        private string GetHash(string input) //Хэширование пароля в БД
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            return Convert.ToBase64String(hash);
+        }
     }
 }

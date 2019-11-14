@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckForm));
             this.cbFIOKas = new System.Windows.Forms.ComboBox();
             this.lblFIOKas = new System.Windows.Forms.Label();
             this.nudKolichecstvo = new System.Windows.Forms.NumericUpDown();
@@ -55,7 +56,7 @@
             this.cbFIOKas.FormattingEnabled = true;
             this.cbFIOKas.Location = new System.Drawing.Point(12, 32);
             this.cbFIOKas.Name = "cbFIOKas";
-            this.cbFIOKas.Size = new System.Drawing.Size(441, 28);
+            this.cbFIOKas.Size = new System.Drawing.Size(436, 28);
             this.cbFIOKas.TabIndex = 1;
             this.cbFIOKas.SelectedIndexChanged += new System.EventHandler(this.cbFIOKas_SelectedIndexChanged);
             // 
@@ -82,7 +83,7 @@
             0,
             0});
             this.nudKolichecstvo.Name = "nudKolichecstvo";
-            this.nudKolichecstvo.Size = new System.Drawing.Size(113, 26);
+            this.nudKolichecstvo.Size = new System.Drawing.Size(128, 26);
             this.nudKolichecstvo.TabIndex = 4;
             this.nudKolichecstvo.Value = new decimal(new int[] {
             1,
@@ -96,7 +97,7 @@
             this.cbService.FormattingEnabled = true;
             this.cbService.Location = new System.Drawing.Point(12, 86);
             this.cbService.Name = "cbService";
-            this.cbService.Size = new System.Drawing.Size(441, 28);
+            this.cbService.Size = new System.Drawing.Size(436, 28);
             this.cbService.TabIndex = 5;
             this.cbService.SelectedIndexChanged += new System.EventHandler(this.cbService_SelectedIndexChanged);
             // 
@@ -121,7 +122,7 @@
             // lblSum
             // 
             this.lblSum.AutoSize = true;
-            this.lblSum.Location = new System.Drawing.Point(127, 117);
+            this.lblSum.Location = new System.Drawing.Point(142, 117);
             this.lblSum.Name = "lblSum";
             this.lblSum.Size = new System.Drawing.Size(58, 20);
             this.lblSum.TabIndex = 8;
@@ -129,9 +130,10 @@
             // 
             // tbSum
             // 
-            this.tbSum.Location = new System.Drawing.Point(131, 140);
+            this.tbSum.Location = new System.Drawing.Point(146, 140);
+            this.tbSum.MaxLength = 7;
             this.tbSum.Name = "tbSum";
-            this.tbSum.Size = new System.Drawing.Size(322, 26);
+            this.tbSum.Size = new System.Drawing.Size(302, 26);
             this.tbSum.TabIndex = 11;
             // 
             // cbFIOCln
@@ -139,7 +141,7 @@
             this.cbFIOCln.FormattingEnabled = true;
             this.cbFIOCln.Location = new System.Drawing.Point(12, 192);
             this.cbFIOCln.Name = "cbFIOCln";
-            this.cbFIOCln.Size = new System.Drawing.Size(321, 28);
+            this.cbFIOCln.Size = new System.Drawing.Size(436, 28);
             this.cbFIOCln.TabIndex = 13;
             this.cbFIOCln.SelectedIndexChanged += new System.EventHandler(this.cbFIOCln_SelectedIndexChanged);
             // 
@@ -184,30 +186,36 @@
             // 
             // btnAddClient
             // 
-            this.btnAddClient.Location = new System.Drawing.Point(339, 192);
+            this.btnAddClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddClient.BackgroundImage")));
+            this.btnAddClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddClient.Location = new System.Drawing.Point(307, 226);
             this.btnAddClient.Name = "btnAddClient";
-            this.btnAddClient.Size = new System.Drawing.Size(34, 28);
+            this.btnAddClient.Size = new System.Drawing.Size(43, 48);
             this.btnAddClient.TabIndex = 18;
-            this.btnAddClient.Text = "button4";
             this.btnAddClient.UseVisualStyleBackColor = true;
+            this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
             // 
             // btnUpdateClient
             // 
-            this.btnUpdateClient.Location = new System.Drawing.Point(379, 192);
+            this.btnUpdateClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdateClient.BackgroundImage")));
+            this.btnUpdateClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUpdateClient.Location = new System.Drawing.Point(356, 226);
             this.btnUpdateClient.Name = "btnUpdateClient";
-            this.btnUpdateClient.Size = new System.Drawing.Size(34, 28);
+            this.btnUpdateClient.Size = new System.Drawing.Size(43, 48);
             this.btnUpdateClient.TabIndex = 19;
-            this.btnUpdateClient.Text = "button5";
             this.btnUpdateClient.UseVisualStyleBackColor = true;
+            this.btnUpdateClient.Click += new System.EventHandler(this.btnUpdateClient_Click);
             // 
             // btnDeleteClient
             // 
-            this.btnDeleteClient.Location = new System.Drawing.Point(419, 192);
+            this.btnDeleteClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDeleteClient.BackgroundImage")));
+            this.btnDeleteClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteClient.Location = new System.Drawing.Point(405, 226);
             this.btnDeleteClient.Name = "btnDeleteClient";
-            this.btnDeleteClient.Size = new System.Drawing.Size(34, 28);
+            this.btnDeleteClient.Size = new System.Drawing.Size(43, 48);
             this.btnDeleteClient.TabIndex = 20;
-            this.btnDeleteClient.Text = "button6";
             this.btnDeleteClient.UseVisualStyleBackColor = true;
+            this.btnDeleteClient.Click += new System.EventHandler(this.btnDeleteClient_Click);
             // 
             // lblDate
             // 
@@ -220,7 +228,7 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(270, 246);
+            this.dtpDate.Location = new System.Drawing.Point(16, 278);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(178, 26);
             this.dtpDate.TabIndex = 42;
@@ -238,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 356);
+            this.ClientSize = new System.Drawing.Size(457, 356);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.mtbDate);
             this.Controls.Add(this.dtpDate);

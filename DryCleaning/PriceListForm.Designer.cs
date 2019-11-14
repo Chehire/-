@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PriceListForm));
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblService = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.BackgroundImage")));
             this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDelete.Location = new System.Drawing.Point(278, 144);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -50,6 +52,7 @@
             // 
             // btnUpdate
             // 
+            this.btnUpdate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdate.BackgroundImage")));
             this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnUpdate.Location = new System.Drawing.Point(141, 144);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -73,12 +76,14 @@
             // 
             this.tbNameService.Location = new System.Drawing.Point(13, 52);
             this.tbNameService.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbNameService.MaxLength = 50;
             this.tbNameService.Name = "tbNameService";
             this.tbNameService.Size = new System.Drawing.Size(310, 26);
             this.tbNameService.TabIndex = 8;
             // 
             // btnAdd
             // 
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
             this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAdd.Location = new System.Drawing.Point(13, 144);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -92,6 +97,7 @@
             // 
             this.tbPrice.Location = new System.Drawing.Point(13, 108);
             this.tbPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbPrice.MaxLength = 8;
             this.tbPrice.Name = "tbPrice";
             this.tbPrice.Size = new System.Drawing.Size(310, 26);
             this.tbPrice.TabIndex = 14;

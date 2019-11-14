@@ -63,6 +63,7 @@
             // 
             this.tbFam.Location = new System.Drawing.Point(13, 34);
             this.tbFam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbFam.MaxLength = 25;
             this.tbFam.Name = "tbFam";
             this.tbFam.Size = new System.Drawing.Size(421, 26);
             this.tbFam.TabIndex = 2;
@@ -132,6 +133,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(13, 90);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbName.MaxLength = 20;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(421, 26);
             this.tbName.TabIndex = 14;
@@ -140,6 +142,7 @@
             // 
             this.tbAdresRegs.Location = new System.Drawing.Point(13, 202);
             this.tbAdresRegs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbAdresRegs.MaxLength = 200;
             this.tbAdresRegs.Name = "tbAdresRegs";
             this.tbAdresRegs.Size = new System.Drawing.Size(421, 26);
             this.tbAdresRegs.TabIndex = 15;
@@ -148,6 +151,7 @@
             // 
             this.tbAdresFact.Location = new System.Drawing.Point(13, 258);
             this.tbAdresFact.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbAdresFact.MaxLength = 200;
             this.tbAdresFact.Name = "tbAdresFact";
             this.tbAdresFact.Size = new System.Drawing.Size(421, 26);
             this.tbAdresFact.TabIndex = 16;
@@ -174,6 +178,7 @@
             // 
             this.tbEmail.Location = new System.Drawing.Point(17, 366);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbEmail.MaxLength = 50;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(421, 26);
             this.tbEmail.TabIndex = 21;
@@ -207,6 +212,7 @@
             // 
             this.tbOtch.Location = new System.Drawing.Point(12, 146);
             this.tbOtch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbOtch.MaxLength = 25;
             this.tbOtch.Name = "tbOtch";
             this.tbOtch.Size = new System.Drawing.Size(421, 26);
             this.tbOtch.TabIndex = 26;

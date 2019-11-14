@@ -70,7 +70,7 @@ namespace DryCleaning
                 using (sqlConnect)
                 {
                     sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand($"select [ID_Organization] from [dbo].[Organization] where [Full_Name] =  '{cbLicenzia.Text}'", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand($"select [ID_Organization] from [dbo].[Organization] where [Full_Name] =  '{cbOrganization.Text}'", sqlConnect);
                     Program.ID_Company = (int)sqlCommand.ExecuteScalar();
                 }
             }
@@ -144,13 +144,12 @@ namespace DryCleaning
                     sqlConnect.Open();
                     SqlCommand sqlCommand = new SqlCommand("Card_Update", sqlConnect);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Card_ID", Program.ID_Card);
+                    sqlCommand.Parameters.AddWithValue("@ID_Card", Program.ID_Card);
                     sqlCommand.Parameters.AddWithValue("@Licenzia_ID", Program.ID_Licenzia);
                     sqlCommand.Parameters.AddWithValue("@Organization_ID", Program.ID_Company);
-                    sqlCommand.Parameters.AddWithValue("@Cena", Convert.ToInt16(tbCena.Text));
+                    sqlCommand.Parameters.AddWithValue("@Cena", Convert.ToInt32(tbCena.Text));
                     sqlCommand.Parameters.AddWithValue("@Date", Convert.ToDateTime(mtbDate.Text).ToShortDateString());
                     sqlCommand.Parameters.AddWithValue("@Sotr_ID", Program.ID_Sotr);
-                    sqlCommand.Parameters.AddWithValue("@Dolj", (tbDolj.Text));
                     sqlCommand.ExecuteNonQuery();
                 }
                 MessageBox.Show("Карта изменена");
@@ -172,7 +171,7 @@ namespace DryCleaning
                     sqlConnect.Open();
                     SqlCommand sqlCommand = new SqlCommand("Card_Delete", sqlConnect);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@ID_Card", Program.ID_Check);
+                    sqlCommand.Parameters.AddWithValue("@ID_Card", Program.ID_Card);
                     sqlCommand.ExecuteNonQuery();
                 }
                 MessageBox.Show("Карта удалена");

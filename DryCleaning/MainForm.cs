@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -17,6 +18,7 @@ namespace DryCleaning
 {
     public partial class MainForm : Form
     {
+        DataBase_Configuration data = new DataBase_Configuration();
         DatabaseConnection database = new DatabaseConnection();
         public MainForm()
         {
@@ -29,6 +31,7 @@ namespace DryCleaning
             lblSearch.Text = "Поиск";
             dataGridView1.RowHeadersVisible = false;
         }
+
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
@@ -63,11 +66,11 @@ namespace DryCleaning
 
         private void Dolj()
         {
-            if (Program.ID_Dolj == 2) //Администратор
+            if (Program.ID_Dolj == 1) //Администратор
             {
                 Restriction();
             }
-            if (Program.ID_Dolj == 1) //Генеральный директор
+            if (Program.ID_Dolj == 2) //Генеральный директор
             {
                 Restriction();
             }
@@ -495,9 +498,10 @@ namespace DryCleaning
                     CardForm Card = new CardForm();
                     Program.ID_Card = (int)dataGridView1.CurrentRow.Cells[0].Value;
                     Card.cbLicenzia.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                    Card.cbOrganization.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                    Card.tbCena.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-                    Card.mtbDate.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    Card.cbOrganization.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    Card.tbCena.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    Card.mtbDate.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                    Card.cbSotr.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
                     Card.btnAdd.Enabled = false;
                     Card.ShowDialog();
                 }
@@ -553,6 +557,7 @@ namespace DryCleaning
                 if (this.Text == "DryCleaning | Лицензионные договора")
                 {
                     LicDocForm licDoc = new LicDocForm();
+                    Program.ID_LicDoc = (int)dataGridView1.CurrentRow.Cells[0].Value;
                     licDoc.btnAdd.Enabled = false;
                     licDoc.ShowDialog();
                 }
@@ -578,13 +583,13 @@ namespace DryCleaning
                     switch (this.Text)
                     {
                         case "DryCleaning | Чеки":
-                           dataGridView1.DataSource = database.TableFill($"select * from [dbo].[View_Check] where [Клиент]  like  '%{tbSearch.Text}%'", sqlConnect).Tables[0];
+                            dataGridView1.DataSource = database.TableFill($"select * from [dbo].[View_Check] where [ID] like '{tbSearch.Text}' or [Клиент]  like  '%{tbSearch.Text}%' or [Услуга]  like  '%{tbSearch.Text}%'  or [Сотрудник] like  '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
                         case "DryCleaning | Должности":
-                            dataGridView1.DataSource = database.TableFill($"select [ID_Dolj], [Dolj], [Oklad] from [dbo].[Dolj] where [Dolj] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
+                            dataGridView1.DataSource = database.TableFill($"select [ID_Dolj], [Dolj], [Oklad] from [dbo].[Dolj] where [Dolj] like '%{tbSearch.Text}%'or  [Oklad] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
                         case "DryCleaning | Прейскурант":
-                            dataGridView1.DataSource = database.TableFill($"select [ID_Service], [Service_Name],[Price] from [dbo].[Price_List] where [Service_Name] like  '%{tbSearch.Text}%'", sqlConnect).Tables[0];
+                            dataGridView1.DataSource = database.TableFill($"select [ID_Service], [Service_Name],[Price] from [dbo].[Price_List] where [Service_Name] like  '%{tbSearch.Text}%' or [Price] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
                         case "DryCleaning | Карты учета НМА":
                             dataGridView1.DataSource = database.TableFill($"select * from [dbo].[View_Card] where [Лицензия] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
@@ -593,7 +598,7 @@ namespace DryCleaning
                             dataGridView1.DataSource = database.TableFill($"select [ID_Organization] as 'ID' ,Name as 'Название компании',Full_Name as 'Полное название',Adres_Rigisrt as 'Адрес регистрации',Fact_Adres as 'Фактический адрес', INN as 'ИНН', Nomer_Organization as 'Номер',e_mail as 'e-mail' from Organization where Full_Name like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
                         case "DryCleaning | Клиенты":
-                            dataGridView1.DataSource = database.TableFill($"select [ID_Client],[Fam_Client],[Name_Client],[Otch_Client],[Nomer_Client] from [dbo].[Client] where [Fam_Client]+' '+[Name_Client]+' '+[Otch_Client] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
+                            dataGridView1.DataSource = database.TableFill($"select [ID_Client],[Fam_Client],[Name_Client],[Otch_Client],[Nomer_Client] from [dbo].[Client] where [Fam_Client]+' '+[Name_Client]+' '+[Otch_Client] like '%{tbSearch.Text}%' or [Nomer_Client] like '%{tbSearch.Text}%'", sqlConnect).Tables[0];
                             break;
                         case "DryCleaning | Лицензиаты":
                             dataGridView1.DataSource = database.TableFill($"select [ID_Licenziat] as [ID], [INN_Licenziat] as [ИНН],[Fam_Licenziat] as [Фамилия],[Name_Licenziat]as [Имя], [Otch_Licenziat] as [Отчество], [Adres_Licenziat] as [Адрес],[Fact_Adres] as [Фактический адрес], [Nomer_Licenziat] as [Моб. номер], [e_mail_Licenziat] as [E-mail] from [dbo].[Licenziat] where [Fam_Licenziat]+' '+[Name_Licenziat]+' '+[Otch_Licenziat] like '%{tbSearch.Text}%' ", sqlConnect).Tables[0];
@@ -685,18 +690,18 @@ namespace DryCleaning
             try
             {
                 copyAlltoClipboard();
-                Microsoft.Office.Interop.Excel.Application xlexcel;
-                Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet1;
+                Excel.Application xlexcel;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+                Excel.Worksheet xlWorkSheet1;
                 object misValue = System.Reflection.Missing.Value;
-                xlexcel = new Microsoft.Office.Interop.Excel.Application();
+                xlexcel = new Excel.Application();
                 xlexcel.Visible = true;
                 xlWorkBook = xlexcel.Workbooks.Add(misValue);
-                xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                xlWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                xlWorkSheet1 = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[2, 1];
+                Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[2, 1];
 
 
                 for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
@@ -706,7 +711,7 @@ namespace DryCleaning
                     for (int j = 1; j < dataGridView1.Rows.Count + 1; j++)
                     {
                         AllBorders(xlWorkSheet.Cells[j, i].Borders);
-                        xlWorkSheet.Cells[j, i].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        xlWorkSheet.Cells[j, i].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     }
                 }
                 CR.Select();
@@ -893,7 +898,6 @@ namespace DryCleaning
             await Task.Run(() => pdfClass.ExportWordToPdf(fileDialog.FileName));
 
         }
-
     }
 }
 

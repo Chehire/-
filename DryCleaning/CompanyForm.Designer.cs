@@ -61,6 +61,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(13, 34);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbName.MaxLength = 50;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(421, 26);
             this.tbName.TabIndex = 2;
@@ -130,6 +131,7 @@
             // 
             this.tbFullName.Location = new System.Drawing.Point(13, 90);
             this.tbFullName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbFullName.MaxLength = 200;
             this.tbFullName.Name = "tbFullName";
             this.tbFullName.Size = new System.Drawing.Size(421, 26);
             this.tbFullName.TabIndex = 14;
@@ -138,6 +140,7 @@
             // 
             this.tbAdresRegs.Location = new System.Drawing.Point(13, 146);
             this.tbAdresRegs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbAdresRegs.MaxLength = 300;
             this.tbAdresRegs.Name = "tbAdresRegs";
             this.tbAdresRegs.Size = new System.Drawing.Size(421, 26);
             this.tbAdresRegs.TabIndex = 15;
@@ -146,6 +149,7 @@
             // 
             this.tbAdresFact.Location = new System.Drawing.Point(13, 202);
             this.tbAdresFact.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbAdresFact.MaxLength = 300;
             this.tbAdresFact.Name = "tbAdresFact";
             this.tbAdresFact.Size = new System.Drawing.Size(421, 26);
             this.tbAdresFact.TabIndex = 16;
@@ -172,6 +176,7 @@
             // 
             this.tbEmail.Location = new System.Drawing.Point(13, 314);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbEmail.MaxLength = 100;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(421, 26);
             this.tbEmail.TabIndex = 21;

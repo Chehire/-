@@ -54,6 +54,7 @@
             // 
             this.tbOtch.Location = new System.Drawing.Point(13, 155);
             this.tbOtch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbOtch.MaxLength = 25;
             this.tbOtch.Name = "tbOtch";
             this.tbOtch.Size = new System.Drawing.Size(331, 26);
             this.tbOtch.TabIndex = 38;
@@ -73,6 +74,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(13, 90);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbName.MaxLength = 20;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(331, 26);
             this.tbName.TabIndex = 36;
@@ -92,6 +94,7 @@
             // 
             this.tbFam.Location = new System.Drawing.Point(13, 34);
             this.tbFam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbFam.MaxLength = 25;
             this.tbFam.Name = "tbFam";
             this.tbFam.Size = new System.Drawing.Size(331, 26);
             this.tbFam.TabIndex = 34;
@@ -109,7 +112,7 @@
             // mtbNum
             // 
             this.mtbNum.Location = new System.Drawing.Point(13, 209);
-            this.mtbNum.Mask = "9990000000";
+            this.mtbNum.Mask = "00000000000";
             this.mtbNum.Name = "mtbNum";
             this.mtbNum.Size = new System.Drawing.Size(331, 26);
             this.mtbNum.TabIndex = 40;

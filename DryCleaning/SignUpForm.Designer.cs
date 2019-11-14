@@ -140,6 +140,7 @@
             // 
             this.tbLogin.Location = new System.Drawing.Point(4, 28);
             this.tbLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbLogin.MaxLength = 16;
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(331, 26);
             this.tbLogin.TabIndex = 18;
@@ -149,6 +150,7 @@
             // 
             this.tbRepPas.Location = new System.Drawing.Point(4, 140);
             this.tbRepPas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbRepPas.MaxLength = 16;
             this.tbRepPas.Name = "tbRepPas";
             this.tbRepPas.Size = new System.Drawing.Size(331, 26);
             this.tbRepPas.TabIndex = 20;
@@ -166,6 +168,7 @@
             // 
             this.tbPas.Location = new System.Drawing.Point(4, 84);
             this.tbPas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbPas.MaxLength = 16;
             this.tbPas.Name = "tbPas";
             this.tbPas.Size = new System.Drawing.Size(331, 26);
             this.tbPas.TabIndex = 19;
@@ -202,7 +205,7 @@
             // 
             this.dtpNaim.Location = new System.Drawing.Point(6, 285);
             this.dtpNaim.Name = "dtpNaim";
-            this.dtpNaim.Size = new System.Drawing.Size(178, 26);
+            this.dtpNaim.Size = new System.Drawing.Size(177, 26);
             this.dtpNaim.TabIndex = 33;
             this.dtpNaim.ValueChanged += new System.EventHandler(this.dtpNaim_ValueChanged);
             // 
@@ -282,6 +285,7 @@
             // 
             this.tbOtch.Location = new System.Drawing.Point(7, 140);
             this.tbOtch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbOtch.MaxLength = 25;
             this.tbOtch.Name = "tbOtch";
             this.tbOtch.Size = new System.Drawing.Size(363, 26);
             this.tbOtch.TabIndex = 28;
@@ -301,6 +305,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(7, 84);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbName.MaxLength = 20;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(363, 26);
             this.tbName.TabIndex = 26;
@@ -320,6 +325,7 @@
             // 
             this.tbFam.Location = new System.Drawing.Point(7, 28);
             this.tbFam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbFam.MaxLength = 25;
             this.tbFam.Name = "tbFam";
             this.tbFam.Size = new System.Drawing.Size(363, 26);
             this.tbFam.TabIndex = 24;

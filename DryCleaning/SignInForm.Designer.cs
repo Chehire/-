@@ -41,6 +41,7 @@
             // 
             this.tbLogin.Location = new System.Drawing.Point(20, 234);
             this.tbLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbLogin.MaxLength = 16;
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(331, 26);
             this.tbLogin.TabIndex = 0;
@@ -81,6 +82,7 @@
             // 
             this.tbPassword.Location = new System.Drawing.Point(18, 302);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbPassword.MaxLength = 16;
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(331, 26);
             this.tbPassword.TabIndex = 1;
