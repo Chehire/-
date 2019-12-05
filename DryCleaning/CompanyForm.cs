@@ -37,29 +37,24 @@ namespace DryCleaning
             btnAdd.Text = "Добавить";
             btnUpdate.Text = "Изменить";
             btnDelete.Text = "Удалить";
+            database.DatabaseSQL().Close();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            
+            database.DatabaseSQL().Open();
             try
-            {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Organization_Insert", sqlConnect);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Name", tbName.Text);
-                    sqlCommand.Parameters.AddWithValue("@Full_Name", tbFullName.Text);
-                    sqlCommand.Parameters.AddWithValue("@Adres_Registr", tbAdresRegs.Text);
-                    sqlCommand.Parameters.AddWithValue("@Fact_Adres", tbAdresFact.Text);
-                    sqlCommand.Parameters.AddWithValue("@INN", mtbINN.Text);
-                    sqlCommand.Parameters.AddWithValue("@Nomer_Organization", mtbNum.Text);
-                    sqlCommand.Parameters.AddWithValue("@e_mail", tbEmail.Text);
-
-                    sqlCommand.ExecuteNonQuery();
-                }
+            {   
+                SqlCommand sqlCommand = new SqlCommand("Organization_Insert", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Name", tbName.Text);
+                sqlCommand.Parameters.AddWithValue("@Full_Name", tbFullName.Text);
+                sqlCommand.Parameters.AddWithValue("@Adres_Registr", tbAdresRegs.Text);
+                sqlCommand.Parameters.AddWithValue("@Fact_Adres", tbAdresFact.Text);
+                sqlCommand.Parameters.AddWithValue("@INN", mtbINN.Text);
+                sqlCommand.Parameters.AddWithValue("@Nomer_Organization", mtbNum.Text);
+                sqlCommand.Parameters.AddWithValue("@e_mail", tbEmail.Text);
+                sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Компания добавлена");
                 this.Hide();
             }
@@ -67,18 +62,15 @@ namespace DryCleaning
             {
                 MessageBox.Show("Компания не добавлена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-           
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Organization_Update", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Organization_Update", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Organization", Program.ID_Company);
                     sqlCommand.Parameters.AddWithValue("@Name", tbName.Text);
@@ -89,7 +81,6 @@ namespace DryCleaning
                     sqlCommand.Parameters.AddWithValue("@Nomer_Organization", mtbNum.Text);
                     sqlCommand.Parameters.AddWithValue("@e_mail", tbEmail.Text);
                     sqlCommand.ExecuteNonQuery();
-                }
                 MessageBox.Show("Компания изменена");
                 this.Hide();
             }
@@ -97,21 +88,29 @@ namespace DryCleaning
             {
                 MessageBox.Show("Компания не изменена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
+                if (Program.ID_Dolj == 1)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Organization_Delete", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Organization_Delete", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Organization", Program.ID_Company);
                     sqlCommand.ExecuteNonQuery();
                 }
+                else
+                {
+                    SqlCommand sqlCommand = new SqlCommand("Organization_Logical_Delete", database.DatabaseSQL());
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@ID_Organization", Program.ID_Company);
+                    sqlCommand.ExecuteNonQuery();
+                }
+
                 MessageBox.Show("Компания удалена");
                 this.Hide();
             }
@@ -119,6 +118,7 @@ namespace DryCleaning
             {
                 MessageBox.Show("Компания не удалена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
     }

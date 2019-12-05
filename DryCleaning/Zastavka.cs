@@ -28,7 +28,6 @@ namespace DryCleaning
         {
             Action action = () =>
             {
-
                 switch (value)
                 {
                     case (true):
@@ -56,7 +55,7 @@ namespace DryCleaning
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar1.Value != 16)
+            if (progressBar1.Value != 17)
                 progressBar1.Value++;
             else
                 this.Close();

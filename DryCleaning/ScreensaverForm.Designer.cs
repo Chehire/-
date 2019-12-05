@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Zastavka));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -43,10 +44,20 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 454);
-            this.progressBar1.Maximum = 16;
+            this.progressBar1.Maximum = 17;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(473, 35);
             this.progressBar1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(7, 426);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(497, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Идет настройка подключения подождите пожалуйста";
             // 
             // Zastavka
             // 
@@ -54,7 +65,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::DryCleaning.Properties.Resources.images;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(497, 526);
+            this.ClientSize = new System.Drawing.Size(502, 526);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -64,12 +76,14 @@
             this.Name = "Zastavka";
             this.Load += new System.EventHandler(this.Zastavka_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         public System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

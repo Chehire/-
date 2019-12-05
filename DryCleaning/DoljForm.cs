@@ -28,60 +28,61 @@ namespace DryCleaning
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Dolj_Insert", sqlConnect);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Dolj", tbName.Text);
-                    sqlCommand.Parameters.AddWithValue("@Oklad", tbOklad.Text);
-                    sqlCommand.ExecuteNonQuery();
-                }
-                MessageBox.Show("Должность добавлена");
+                SqlCommand sqlCommand = new SqlCommand("Dolj_Insert", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Dolj", tbName.Text);
+                sqlCommand.Parameters.AddWithValue("@Oklad", tbOklad.Text);
+                sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("Должность добавлена"); 
                 this.Hide();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Должность не добавлена");
+                MessageBox.Show("Должность не добавлена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Dolj_Update", sqlConnect);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@ID_Dolj", Program.ID_Position);
-                    sqlCommand.Parameters.AddWithValue("@Dolj", tbName.Text);
-                    sqlCommand.Parameters.AddWithValue("@Oklad", tbOklad.Text);
-                    sqlCommand.ExecuteNonQuery();
-                }
+
+                SqlCommand sqlCommand = new SqlCommand("Dolj_Update", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ID_Dolj", Program.ID_Position);
+                sqlCommand.Parameters.AddWithValue("@Dolj", tbName.Text);
+                sqlCommand.Parameters.AddWithValue("@Oklad", tbOklad.Text);
+                sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Должность изменена");
                 this.Hide();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Должность не изменена");
+                MessageBox.Show("Должность не изменена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
+                if (Program.ID_Dolj ==1)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Dolj_Delete", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Dolj_Delete", database.DatabaseSQL());
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@ID_Dolj", Program.ID_Position);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    SqlCommand sqlCommand = new SqlCommand("Dolj_Logical_Delete", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Dolj", Program.ID_Position);
                     sqlCommand.ExecuteNonQuery();
@@ -89,10 +90,11 @@ namespace DryCleaning
                 MessageBox.Show("Должность удалена");
                 this.Hide();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Должность не удалена");
+                MessageBox.Show("Должность не удалена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
     }
 }

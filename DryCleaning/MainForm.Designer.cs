@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ВыводToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.ВыходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,12 +52,15 @@
             this.ОбновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.здравствуйтеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сменитьПарольToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -71,7 +74,9 @@
             this.dirToolStripMenuItem,
             this.ОбновитьToolStripMenuItem,
             this.настройкиToolStripMenuItem,
-            this.видToolStripMenuItem});
+            this.видToolStripMenuItem,
+            this.здравствуйтеToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
@@ -82,13 +87,20 @@
             // ФайлToolStripMenuItem
             // 
             this.ФайлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ВыводToolStripMenuItem,
             this.signOutToolStripMenuItem,
+            this.ВыводToolStripMenuItem,
             this.toolStripMenuItem1,
             this.ВыходToolStripMenuItem});
             this.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem";
             this.ФайлToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.ФайлToolStripMenuItem.Text = "Файл";
+            // 
+            // signOutToolStripMenuItem
+            // 
+            this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(302, 30);
+            this.signOutToolStripMenuItem.Text = "Выход из учетной записи";
+            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.SigOutToolStripMenuItem_Click);
             // 
             // ВыводToolStripMenuItem
             // 
@@ -103,30 +115,23 @@
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(141, 30);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.ExcelToolStripMenuItem_Click);
             // 
             // wordToolStripMenuItem
             // 
             this.wordToolStripMenuItem.Name = "wordToolStripMenuItem";
-            this.wordToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.wordToolStripMenuItem.Size = new System.Drawing.Size(141, 30);
             this.wordToolStripMenuItem.Text = "Word";
             this.wordToolStripMenuItem.Click += new System.EventHandler(this.WordToolStripMenuItem_Click);
             // 
             // pDFToolStripMenuItem
             // 
             this.pDFToolStripMenuItem.Name = "pDFToolStripMenuItem";
-            this.pDFToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.pDFToolStripMenuItem.Size = new System.Drawing.Size(141, 30);
             this.pDFToolStripMenuItem.Text = "PDF";
             this.pDFToolStripMenuItem.Click += new System.EventHandler(this.PDFToolStripMenuItem_Click);
-            // 
-            // signOutToolStripMenuItem
-            // 
-            this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(302, 30);
-            this.signOutToolStripMenuItem.Text = "Выход из учетной записи";
-            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.SigOutToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -248,6 +253,21 @@
             this.видToolStripMenuItem.Text = "Вид";
             this.видToolStripMenuItem.Visible = false;
             // 
+            // здравствуйтеToolStripMenuItem
+            // 
+            this.здравствуйтеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сменитьПарольToolStripMenuItem});
+            this.здравствуйтеToolStripMenuItem.Name = "здравствуйтеToolStripMenuItem";
+            this.здравствуйтеToolStripMenuItem.Size = new System.Drawing.Size(134, 29);
+            this.здравствуйтеToolStripMenuItem.Text = "Здравствуйте";
+            // 
+            // сменитьПарольToolStripMenuItem
+            // 
+            this.сменитьПарольToolStripMenuItem.Name = "сменитьПарольToolStripMenuItem";
+            this.сменитьПарольToolStripMenuItem.Size = new System.Drawing.Size(229, 30);
+            this.сменитьПарольToolStripMenuItem.Text = "Сменить пароль";
+            this.сменитьПарольToolStripMenuItem.Click += new System.EventHandler(this.ChangePasswordToolStripMenuItem_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -300,6 +320,13 @@
             this.lblSearch.Size = new System.Drawing.Size(55, 20);
             this.lblSearch.TabIndex = 3;
             this.lblSearch.Text = "Поиск";
+            // 
+            // aboutProgramToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(137, 29);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -356,6 +383,9 @@
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem здравствуйтеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сменитьПарольToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
     }
 }
 

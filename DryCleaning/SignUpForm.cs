@@ -45,25 +45,24 @@ namespace DryCleaning
         }
 
         private void ShowDolj() //Вывод должности в comboBox
-        { 
-            var sqlConnection = database.DatabaseSQL();
-            using (sqlConnection)
+        {
+            database.DatabaseSQL().Open();
             {
-                cbDolj.DataSource = database.TableFill("select Dolj from [dbo].[Dolj]", sqlConnection).Tables[0];
+                cbDolj.DataSource = database.TableFill("select Dolj from [dbo].[Dolj]", database.DatabaseSQL()).Tables[0];
                 cbDolj.DisplayMember = "Dolj";
             }
+            database.DatabaseSQL().Close();
         }
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                SqlConnection sqlConnection = database.DatabaseSQL();
-                using (sqlConnection)
+                database.DatabaseSQL().Open();
                 {
-                    sqlConnection.Open();
-                    SqlCommand cmd = new SqlCommand($"select ID_Dolj from [dbo].[Dolj] where Dolj = '{cbDolj.Text}'", sqlConnection);
+                    SqlCommand cmd = new SqlCommand($"select ID_Dolj from [dbo].[Dolj] where Dolj = '{cbDolj.Text}'", database.DatabaseSQL());
                     Program.ID_Position = (int)cmd.ExecuteScalar();
                 }
+                database.DatabaseSQL().Close();
             }
             catch { }
         }
@@ -82,16 +81,14 @@ namespace DryCleaning
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
                 if (tbPas.Text == tbRepPas.Text)
-                {
-                    var sqlConnection = database.DatabaseSQL();
+                { 
                     string passwordHash = GetHash(tbPas.Text);
-                    using (sqlConnection)
                     {
-                        sqlConnection.Open();
-                        var sqlCommand = new SqlCommand("Sotr_Insert", sqlConnection);
+                        var sqlCommand = new SqlCommand("Sotr_Insert", database.DatabaseSQL());
                         sqlCommand.CommandType = CommandType.StoredProcedure;
                         sqlCommand.Parameters.AddWithValue("@Fam_Sotr", tbFam.Text);
                         sqlCommand.Parameters.AddWithValue("@Name_Sotr", tbName.Text);
@@ -119,59 +116,52 @@ namespace DryCleaning
             {
                 MessageBox.Show("Сотрудник не добавлен" + ex.Message);
             }
+            database.DatabaseSQL().Close();
 
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
-            {
-                if (tbPas.Text == tbRepPas.Text)
-                {
-                    var sqlConnection = database.DatabaseSQL();
-                    using (sqlConnection)
-                    {
-                        sqlConnection.Open();
-                        var sqlCommand = new SqlCommand("Sotr_Update", sqlConnection);
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
-                        sqlCommand.Parameters.AddWithValue("@Fam_Sotr", tbFam.Text);
-                        sqlCommand.Parameters.AddWithValue("@Name_Sotr", tbName.Text);
-                        sqlCommand.Parameters.AddWithValue("@Otch_Sotr", tbOtch.Text);
-                        sqlCommand.Parameters.AddWithValue("@Ser_Pas", mtbSer.Text);
-                        sqlCommand.Parameters.AddWithValue("@Num_Pas", mtbNum.Text);
-                        //sqlCommand.Parameters.AddWithValue("@Login_Sotr", tbLogin.Text);
-                        //sqlCommand.Parameters.AddWithValue("@Password_Sotr", passwordHash);
-                        sqlCommand.Parameters.AddWithValue("@Date_Naim", Convert.ToDateTime(mtbNaim.Text).Date);
-                        sqlCommand.Parameters.AddWithValue("@Date_Uvol", mtbYvol.Text);
-                        sqlCommand.Parameters.AddWithValue("@Dolj_ID", Program.ID_Position);
-                        sqlCommand.ExecuteNonQuery();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Пароли не совпадают");
-                }
-
+            {   
+                var sqlCommand = new SqlCommand("Sotr_Update", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
+                sqlCommand.Parameters.AddWithValue("@Fam_Sotr", tbFam.Text);
+                sqlCommand.Parameters.AddWithValue("@Name_Sotr", tbName.Text);
+                sqlCommand.Parameters.AddWithValue("@Otch_Sotr", tbOtch.Text);
+                sqlCommand.Parameters.AddWithValue("@Ser_Pas", mtbSer.Text);
+                sqlCommand.Parameters.AddWithValue("@Num_Pas", mtbNum.Text);
+                sqlCommand.Parameters.AddWithValue("@Date_Naim", Convert.ToDateTime(mtbNaim.Text).Date);
+                sqlCommand.Parameters.AddWithValue("@Date_Uvol", mtbYvol.Text);
+                sqlCommand.Parameters.AddWithValue("@Dolj_ID", Program.ID_Position);
+                sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Сотрудник изменен");
                 this.Hide();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Сотрудник не изменен " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
+                if (Program.ID_Dolj == 1)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Sotr_Delete", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Sotr_Delete", database.DatabaseSQL());
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    SqlCommand sqlCommand = new SqlCommand("Sotr_Logical_Delete", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Sotr", Program.ID_Sotr);
                     sqlCommand.ExecuteNonQuery();
@@ -183,6 +173,7 @@ namespace DryCleaning
             {
                 MessageBox.Show("Сотрудник не удален " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
     }
 }

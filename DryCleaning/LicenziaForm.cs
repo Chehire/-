@@ -30,17 +30,13 @@ namespace DryCleaning
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Licenzii_Insert", sqlConnect);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Licenzia_Name", tbLicenzia.Text);
-                    sqlCommand.ExecuteNonQuery();
-                }
+                SqlCommand sqlCommand = new SqlCommand("Licenzii_Insert", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Licenzia_Name", tbLicenzia.Text);
+                sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Лицензия добавлена");
                 this.Hide();
             }
@@ -48,22 +44,19 @@ namespace DryCleaning
             {
                 MessageBox.Show("Лицензия не добавлена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
-                {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Licenzii_Update", sqlConnect);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@ID_Licenzia", Program.ID_Licenzia);
-                    sqlCommand.Parameters.AddWithValue("@Licenzia_Name", tbLicenzia.Text);
-                    sqlCommand.ExecuteNonQuery();
-                }
+                SqlCommand sqlCommand = new SqlCommand("Licenzii_Update", database.DatabaseSQL());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ID_Licenzia", Program.ID_Licenzia);
+                sqlCommand.Parameters.AddWithValue("@Licenzia_Name", tbLicenzia.Text);
+                sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Лицензия изменена");
                 this.Hide();
             }
@@ -71,17 +64,24 @@ namespace DryCleaning
             {
                 MessageBox.Show("Лицензия не изменена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
+                if (Program.ID_Dolj == 1)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Licenzii_Delete", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Licenzii_Delete", database.DatabaseSQL());
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@ID_Licenzia", Program.ID_Licenzia);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    SqlCommand sqlCommand = new SqlCommand("Licenzii_Logical_Delete", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Licenzia", Program.ID_Licenzia);
                     sqlCommand.ExecuteNonQuery();
@@ -93,6 +93,7 @@ namespace DryCleaning
             {
                 MessageBox.Show("Лицензия не удалена " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
     }
 }

@@ -8,12 +8,11 @@ using System.Windows.Forms;
 namespace DryCleaning
 {
     public partial class SignInForm : Form
-{
+    {
         DatabaseConnection DrySql = new DatabaseConnection();
-        //DataBase_Configuration data = new DataBase_Configuration();
 
         public SignInForm()
-        { 
+        {
             InitializeComponent();
             this.TopMost = true; //Вызов окна поверх других
             this.StartPosition = FormStartPosition.CenterScreen; //Расположение окна по центру монитора
@@ -42,42 +41,35 @@ namespace DryCleaning
 
         private void CheckUsers()
         {
-            
-            try
+            DrySql.DatabaseSQL().Open();
+            string loginCheck = tbLogin.Text;
+            string passwordCheck = GetHash(tbPassword.Text);
+            string checkCmd = $"Select [Login_Sotr], [Password_Sotr] from [dbo].[Sotr] where [Login_Sotr] = '{loginCheck}'  and [Password_Sotr] = '{passwordCheck}'";
+            string checkRole = $"Select [Dolj_ID] from [dbo].[Sotr] where [Login_Sotr] ='{loginCheck}'";
+
+
+
+            var command = new SqlCommand(checkCmd, DrySql.DatabaseSQL());
+            var commandRole = new SqlCommand(checkRole, DrySql.DatabaseSQL());
+            command.Prepare();
+            command.ExecuteNonQuery();
+            if (loginCheck == (string)command.ExecuteScalar())
             {
-                string loginCheck = tbLogin.Text;
-                string passwordCheck = GetHash(tbPassword.Text);
-                string checkCmd = $"Select [Login_Sotr], [Password_Sotr] from [dbo].[Sotr] where [Login_Sotr] = '{loginCheck}'  and [Password_Sotr] = '{passwordCheck}'";
-                string checkRole = $"Select [Dolj_ID] from [dbo].[Sotr] where [Login_Sotr] ='{loginCheck}'";
-                var sqlconnection = DrySql.DatabaseSQL();
-                    sqlconnection.Open();
-                using (sqlconnection)
-                {
-                    var command = new SqlCommand(checkCmd, sqlconnection);
-                    var commandRole = new SqlCommand(checkRole, sqlconnection);
-                    command.Prepare();
-                    command.ExecuteNonQuery();
-                    if (loginCheck == (string)command.ExecuteScalar())
-                    {
-                        
-                        Program.ID_Dolj = (int)commandRole.ExecuteScalar();
-                        MessageBox.Show("Авторизация успешна");
-                        this.Hide();
-                        MainForm mainForm = new MainForm();
-                        mainForm.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Логин или пароль ведены не верно");
-                    }
-                }
+
+                Program.ID_Dolj = (int)commandRole.ExecuteScalar();
+                Program.Autoriz_Sotr = (tbLogin.Text);
+                MessageBox.Show("Авторизация успешна");
+                this.Hide();
+                MainForm mainForm = new MainForm();
+                mainForm.Show();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Логин или пароль ведены не верно");
             }
 
-        }
+            DrySql.DatabaseSQL().Close();
+        } 
 
         private string GetHash(string input) //Хэширование пароля в БД
         {

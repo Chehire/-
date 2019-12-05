@@ -25,13 +25,11 @@ namespace DryCleaning
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Client_Insert", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Client_Insert", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@Fam_Client", tbFam.Text);
                     sqlCommand.Parameters.AddWithValue("@Name_Client", tbName.Text);
@@ -42,21 +40,20 @@ namespace DryCleaning
                 MessageBox.Show("Клиент добавлен");
                 this.Hide();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Клиент не добавлен");
+                MessageBox.Show("Клиент не добавлен " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Client_Update", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Client_Update", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Client", Program.ID_Client);
                     sqlCommand.Parameters.AddWithValue("@Fam_Client", tbFam.Text);
@@ -70,21 +67,20 @@ namespace DryCleaning
                 this.Hide();
             }
 
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Клиент не изменен");
+                MessageBox.Show("Клиент не изменен " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            database.DatabaseSQL().Open();
             try
             {
-                var sqlConnect = database.DatabaseSQL();
-                using (sqlConnect)
                 {
-                    sqlConnect.Open();
-                    SqlCommand sqlCommand = new SqlCommand("Client_Delete", sqlConnect);
+                    SqlCommand sqlCommand = new SqlCommand("Client_Delete", database.DatabaseSQL());
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID_Client", Program.ID_Client);
                     sqlCommand.ExecuteNonQuery();
@@ -92,10 +88,11 @@ namespace DryCleaning
                 MessageBox.Show("Клиент удален");
                 this.Hide();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Клиент не удален ");
+                MessageBox.Show("Клиент не удален " + ex.Message);
             }
+            database.DatabaseSQL().Close();
         }
     }
 }

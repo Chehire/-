@@ -36,7 +36,7 @@ namespace DryCleaning
             }
             catch (SqlException ex)
             {
-               DatabaseConnection.error_message += "\n" + DateTime.Now.ToLongDateString()
+                DatabaseConnection.error_message += "\n" + DateTime.Now.ToLongDateString()
                     + ex.Message;
             }
             finally

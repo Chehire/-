@@ -8,6 +8,7 @@ namespace DryCleaning
 {
     static class Program
     {
+        public static string Autoriz_Sotr;
         public static int ID_Position;
         public static int ID_Sotr;
         public static int ID_Dolj;

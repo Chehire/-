@@ -56,7 +56,6 @@ public class DatabaseConnection
 
     public SqlConnection DatabaseSQL()
     {
-        Registry_Get();
         return sqlConnection;
     }
 

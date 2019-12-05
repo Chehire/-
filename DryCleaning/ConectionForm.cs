@@ -71,7 +71,7 @@ namespace DryCleaning
             }
             do
             {
-                Thread.Sleep(750);
+                Thread.Sleep(300);
                 switch (status)
                 {
                     case (1):
@@ -128,7 +128,6 @@ namespace DryCleaning
             DataBase_Configuration.logCon = true;
             Zastavka zastavka = new Zastavka();
             zastavka.Show();
-            zastavka.timer1.Enabled = true;
             this.Close();
         }
 

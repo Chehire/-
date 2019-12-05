@@ -48,6 +48,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
+            this.chBShowHide = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudKolichecstvo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,7 +189,7 @@
             // 
             this.btnAddClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddClient.BackgroundImage")));
             this.btnAddClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddClient.Location = new System.Drawing.Point(307, 226);
+            this.btnAddClient.Location = new System.Drawing.Point(280, 226);
             this.btnAddClient.Name = "btnAddClient";
             this.btnAddClient.Size = new System.Drawing.Size(43, 48);
             this.btnAddClient.TabIndex = 18;
@@ -199,7 +200,7 @@
             // 
             this.btnUpdateClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdateClient.BackgroundImage")));
             this.btnUpdateClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUpdateClient.Location = new System.Drawing.Point(356, 226);
+            this.btnUpdateClient.Location = new System.Drawing.Point(339, 226);
             this.btnUpdateClient.Name = "btnUpdateClient";
             this.btnUpdateClient.Size = new System.Drawing.Size(43, 48);
             this.btnUpdateClient.TabIndex = 19;
@@ -210,7 +211,7 @@
             // 
             this.btnDeleteClient.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDeleteClient.BackgroundImage")));
             this.btnDeleteClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteClient.Location = new System.Drawing.Point(405, 226);
+            this.btnDeleteClient.Location = new System.Drawing.Point(402, 226);
             this.btnDeleteClient.Name = "btnDeleteClient";
             this.btnDeleteClient.Size = new System.Drawing.Size(43, 48);
             this.btnDeleteClient.TabIndex = 20;
@@ -242,11 +243,22 @@
             this.mtbDate.Size = new System.Drawing.Size(166, 26);
             this.mtbDate.TabIndex = 43;
             // 
+            // chBShowHide
+            // 
+            this.chBShowHide.AutoSize = true;
+            this.chBShowHide.Location = new System.Drawing.Point(280, 282);
+            this.chBShowHide.Name = "chBShowHide";
+            this.chBShowHide.Size = new System.Drawing.Size(168, 24);
+            this.chBShowHide.TabIndex = 45;
+            this.chBShowHide.Text = "Покахать/Скрыть";
+            this.chBShowHide.UseVisualStyleBackColor = true;
+            // 
             // CheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 356);
+            this.Controls.Add(this.chBShowHide);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.mtbDate);
             this.Controls.Add(this.dtpDate);
@@ -267,7 +279,7 @@
             this.Controls.Add(this.lblFIOKas);
             this.Controls.Add(this.cbFIOKas);
             this.Name = "CheckForm";
-            this.Text = "Чек";
+            this.Text = " ";
             ((System.ComponentModel.ISupportInitialize)(this.nudKolichecstvo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -294,5 +306,6 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dtpDate;
         public System.Windows.Forms.MaskedTextBox mtbDate;
+        public System.Windows.Forms.CheckBox chBShowHide;
     }
 }

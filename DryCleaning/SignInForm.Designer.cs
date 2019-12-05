@@ -49,11 +49,11 @@
             // lblAutorization
             // 
             this.lblAutorization.AutoSize = true;
-            this.lblAutorization.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblAutorization.Font = new System.Drawing.Font("Comic Sans MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblAutorization.Location = new System.Drawing.Point(10, 66);
             this.lblAutorization.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAutorization.Name = "lblAutorization";
-            this.lblAutorization.Size = new System.Drawing.Size(200, 37);
+            this.lblAutorization.Size = new System.Drawing.Size(218, 45);
             this.lblAutorization.TabIndex = 1;
             this.lblAutorization.Text = "Авторизация";
             // 
