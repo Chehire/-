@@ -156,6 +156,87 @@ namespace DryCleaning
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
+        private void ChangePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm changePassword = new ChangePasswordForm();
+            changePassword.ShowDialog();
+        }
+
+        private void aboutProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutbox = new AboutBox();
+            aboutbox.ShowDialog();
+        }
+
+        private void Cheack_MS_Office_Click(object sender, EventArgs e)
+        {
+            string sVersion = string.Empty;
+            Microsoft.Office.Interop.Word.Application appVersion = new Microsoft.Office.Interop.Word.Application();
+            appVersion.Visible = false;
+            switch (appVersion.Version.ToString())
+            {
+                case "7.0":
+                    sVersion = "95";
+                    break;
+                case "8.0":
+                    sVersion = "97";
+                    break;
+                case "9.0":
+                    sVersion = "2000";
+                    break;
+                case "10.0":
+                    sVersion = "2002";
+                    break;
+                case "11.0":
+                    sVersion = "2003";
+                    break;
+                case "12.0":
+                    sVersion = "2007";
+                    break;
+                case "14.0":
+                    sVersion = "2010";
+                    break;
+                case "15.0":
+                    sVersion = "2013";
+                    break;
+                case "16.0":
+                    sVersion = "2016";
+                    break;
+                default:
+                    sVersion = "Too Old!";
+                    break;
+            }
+            MessageBox.Show("На компьюторе обнаружена версия MS Office : " + sVersion);
+        }
+
+        private void Check_Word_Click(object sender, EventArgs e)
+        {
+            using (var regWord = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("Word.Application"))
+            {
+                if (regWord == null)
+                {
+                    MessageBox.Show("Microsoft Word РЅРµ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚");
+                }
+                else
+                {
+                    MessageBox.Show("Microsoft Word РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚");
+                }
+            }
+        }
+
+        private void Check_Excel_Click(object sender, EventArgs e)
+        {
+            Type officeType = Type.GetTypeFromProgID("Excel.Application");
+            if (officeType == null)
+            {
+                MessageBox.Show("Microsoft Excel не установлен");
+            }
+            else
+            {
+                MessageBox.Show("Microsoft Excel установлен");
+            }
+        }
+
         private void EmployeeListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowFillEmployeeList();
@@ -879,18 +960,6 @@ namespace DryCleaning
             PdfClass pdfClass = new PdfClass();
             await Task.Run(() => pdfClass.ExportWordToPdf(fileDialog.FileName));
 
-        }
-
-        private void ChangePasswordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangePasswordForm changePassword = new ChangePasswordForm();
-            changePassword.ShowDialog();
-        }
-
-        private void aboutProgramToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBox aboutbox = new AboutBox();
-            aboutbox.ShowDialog();
         }
     }
 }

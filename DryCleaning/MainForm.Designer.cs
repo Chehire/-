@@ -51,16 +51,19 @@
             this.licdocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ОбновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проверкаНеобходимогоПОToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проверкаНаличияMSExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проверкаНаличияMSOfficeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.здравствуйтеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сменитьПарольToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -241,10 +244,34 @@
             // 
             // настройкиToolStripMenuItem
             // 
+            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.проверкаНеобходимогоПОToolStripMenuItem,
+            this.проверкаНаличияMSExcelToolStripMenuItem,
+            this.проверкаНаличияMSOfficeToolStripMenuItem});
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.настройкиToolStripMenuItem.Text = "Настройки";
-            this.настройкиToolStripMenuItem.Visible = false;
+            // 
+            // проверкаНеобходимогоПОToolStripMenuItem
+            // 
+            this.проверкаНеобходимогоПОToolStripMenuItem.Name = "проверкаНеобходимогоПОToolStripMenuItem";
+            this.проверкаНеобходимогоПОToolStripMenuItem.Size = new System.Drawing.Size(334, 30);
+            this.проверкаНеобходимогоПОToolStripMenuItem.Text = "Проверка наличия MS Word";
+            this.проверкаНеобходимогоПОToolStripMenuItem.Click += new System.EventHandler(this.Check_Word_Click);
+            // 
+            // проверкаНаличияMSExcelToolStripMenuItem
+            // 
+            this.проверкаНаличияMSExcelToolStripMenuItem.Name = "проверкаНаличияMSExcelToolStripMenuItem";
+            this.проверкаНаличияMSExcelToolStripMenuItem.Size = new System.Drawing.Size(334, 30);
+            this.проверкаНаличияMSExcelToolStripMenuItem.Text = "Проверка наличия MS Excel";
+            this.проверкаНаличияMSExcelToolStripMenuItem.Click += new System.EventHandler(this.Check_Excel_Click);
+            // 
+            // проверкаНаличияMSOfficeToolStripMenuItem
+            // 
+            this.проверкаНаличияMSOfficeToolStripMenuItem.Name = "проверкаНаличияMSOfficeToolStripMenuItem";
+            this.проверкаНаличияMSOfficeToolStripMenuItem.Size = new System.Drawing.Size(334, 30);
+            this.проверкаНаличияMSOfficeToolStripMenuItem.Text = "Проверка наличия MS Office";
+            this.проверкаНаличияMSOfficeToolStripMenuItem.Click += new System.EventHandler(this.Cheack_MS_Office_Click);
             // 
             // видToolStripMenuItem
             // 
@@ -268,10 +295,17 @@
             this.сменитьПарольToolStripMenuItem.Text = "Сменить пароль";
             this.сменитьПарольToolStripMenuItem.Click += new System.EventHandler(this.ChangePasswordToolStripMenuItem_Click);
             // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(137, 29);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 100);
+            this.dataGridView1.Location = new System.Drawing.Point(18, 108);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
@@ -308,7 +342,7 @@
             this.tbSearch.Location = new System.Drawing.Point(76, 38);
             this.tbSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(400, 30);
+            this.tbSearch.Size = new System.Drawing.Size(615, 30);
             this.tbSearch.TabIndex = 2;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
@@ -320,13 +354,6 @@
             this.lblSearch.Size = new System.Drawing.Size(55, 20);
             this.lblSearch.TabIndex = 3;
             this.lblSearch.Text = "Поиск";
-            // 
-            // aboutProgramToolStripMenuItem
-            // 
-            this.оПрограммеToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(137, 29);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
-            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -386,6 +413,9 @@
         private System.Windows.Forms.ToolStripMenuItem здравствуйтеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сменитьПарольToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проверкаНеобходимогоПОToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проверкаНаличияMSExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проверкаНаличияMSOfficeToolStripMenuItem;
     }
 }
 

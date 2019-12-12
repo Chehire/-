@@ -57,6 +57,7 @@
             this.lblFam = new System.Windows.Forms.Label();
             this.tcSotr = new System.Windows.Forms.TabControl();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tcSotr.SuspendLayout();
@@ -64,7 +65,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(290, 379);
+            this.btnDelete.Location = new System.Drawing.Point(283, 418);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(102, 30);
@@ -75,7 +76,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(11, 379);
+            this.btnAdd.Location = new System.Drawing.Point(4, 418);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(102, 30);
@@ -344,7 +345,7 @@
             // 
             this.tcSotr.Controls.Add(this.tabPage1);
             this.tcSotr.Controls.Add(this.tabPage2);
-            this.tcSotr.Location = new System.Drawing.Point(11, 11);
+            this.tcSotr.Location = new System.Drawing.Point(4, 50);
             this.tcSotr.Name = "tcSotr";
             this.tcSotr.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tcSotr.SelectedIndex = 0;
@@ -353,7 +354,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(142, 379);
+            this.btnUpdate.Location = new System.Drawing.Point(135, 418);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(102, 30);
@@ -362,11 +363,22 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(12, 12);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(102, 30);
+            this.btnPrint.TabIndex = 33;
+            this.btnPrint.Text = "Печать";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // SigUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 419);
+            this.ClientSize = new System.Drawing.Size(393, 462);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.tcSotr);
             this.Controls.Add(this.btnDelete);
@@ -413,5 +425,6 @@
         public System.Windows.Forms.Button btnUpdate;
         public System.Windows.Forms.Button btnDelete;
         public System.Windows.Forms.DateTimePicker dtpNaim;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
