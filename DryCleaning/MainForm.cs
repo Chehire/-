@@ -31,6 +31,8 @@ namespace DryCleaning
             lblSearch.Text = "Поиск";
             dataGridView1.RowHeadersVisible = false;
             LichniyKabinet();
+            DataGridLocation();
+            chart_statistic.Visible = false;
         }
 
 
@@ -43,8 +45,16 @@ namespace DryCleaning
         {
             dataGridView1.Top = 50;
             dataGridView1.Left = 12;
-            dataGridView1.Width = ClientSize.Width - 22;
+            chart_statistic.Top = 50;
             dataGridView1.Height = ClientSize.Height - 60;
+            if (chart_statistic.Visible == true)
+            {
+                dataGridView1.Width = ClientSize.Width - chart_statistic.Width - 20;
+                chart_statistic.Left = dataGridView1.Width + 20;
+            }
+            else dataGridView1.Width = ClientSize.Width - 20;
+
+
         }
 
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,10 +76,13 @@ namespace DryCleaning
 
         private void LichniyKabinet()
         {
+            database.DatabaseSQL().Close();
+            database.DatabaseSQL().Open();
             string IF_Sotr = "";
             SqlCommand sqlCommand = new SqlCommand($"select [Name_Sotr]+' '+[Fam_Sotr] from [dbo].[Sotr] where [Login_Sotr] = '{Program.Autoriz_Sotr}'", database.DatabaseSQL());
             IF_Sotr = sqlCommand.ExecuteScalar().ToString();
             здравствуйтеToolStripMenuItem.Text = ("Здравствуйте " + IF_Sotr);
+            database.DatabaseSQL().Close();
         }
 
 
@@ -215,11 +228,11 @@ namespace DryCleaning
             {
                 if (regWord == null)
                 {
-                    MessageBox.Show("Microsoft Word РЅРµ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚");
+                    MessageBox.Show("Microsoft Word не установлен");
                 }
                 else
                 {
-                    MessageBox.Show("Microsoft Word РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚");
+                    MessageBox.Show("Microsoft Word установлен");
                 }
             }
         }
@@ -959,7 +972,35 @@ namespace DryCleaning
             fileDialog.ShowDialog();
             PdfClass pdfClass = new PdfClass();
             await Task.Run(() => pdfClass.ExportWordToPdf(fileDialog.FileName));
+        }
 
+        private void staticToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (chart_statistic.Visible == false)
+            {
+                chart_statistic.Visible = true;
+                DataGridLocation();
+                Statistic();
+            }
+            else
+            {
+                chart_statistic.Visible = false;
+                DataGridLocation();
+            }
+        }
+
+        private void Statistic()
+        {
+            //bal1 - это первая переменная, дата
+            //bal2 - вторая переменная 
+            chart_statistic.Series[0].Points.Clear();
+            int ss = 0;
+            while (ss < dataGridView1.Rows.Count)
+            {
+                var bal1 = dataGridView1.Rows[ss].Cells[4].Value;
+                var bal2 = dataGridView1.Rows[ss].Cells[6].Value;
+                chart_statistic.Series[0].Points.AddXY(Convert.ToString(bal2), Convert.ToString(bal1)); ss++;
+            }
         }
     }
 }

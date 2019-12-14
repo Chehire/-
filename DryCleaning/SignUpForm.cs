@@ -186,9 +186,17 @@ namespace DryCleaning
             database.DatabaseSQL().Open();
             int oklad;
             string company;
-            SqlCommand cmd = new SqlCommand($"select Oklad from [dbo].[Dolj] where Dolj = '{cbDolj.Text}'", database.DatabaseSQL());
-            oklad = (int)cmd.ExecuteScalar();
-
+            string FIODir;
+            string DoljDir;
+            string date= DateTime.Now.ToLongDateString();
+            SqlCommand cmdDolj = new SqlCommand($"select Oklad from [dbo].[Dolj] where Dolj = '{cbDolj.Text}'", database.DatabaseSQL());
+            oklad = (int)cmdDolj.ExecuteScalar();
+            SqlCommand cmdCompany = new SqlCommand($"select Name from [dbo].[Organization] where [ID_Organization] = 1", database.DatabaseSQL());
+            company = (string)cmdCompany.ExecuteScalar();
+            SqlCommand cmdDir = new SqlCommand($"select [Fam_Sotr]+' '+[Name_Sotr]+' '+[Otch_sotr] from [dbo].[Sotr] where [Dolj_ID] = 2", database.DatabaseSQL());
+            FIODir = (string)cmdDir.ExecuteScalar();
+            SqlCommand cmdDoljDir = new SqlCommand($"select [Dolj] from [dbo].[Dolj] where [ID_Dolj] = 2", database.DatabaseSQL());
+            DoljDir = (string)cmdDoljDir.ExecuteScalar();
             database.DatabaseSQL().Close();
 
             oDoc.Bookmarks["FIO_Sotr1"].Range.Text = tbFam.Text+" "+tbName.Text+" "+tbOtch.Text;
@@ -196,6 +204,12 @@ namespace DryCleaning
             oDoc.Bookmarks["FIO_Sotr3"].Range.Text = tbFam.Text + " " + tbName.Text + " " + tbOtch.Text;
             oDoc.Bookmarks["Dolj"].Range.Text = cbDolj.Text;
             oDoc.Bookmarks["Oklad"].Range.Text = oklad.ToString();
+            oDoc.Bookmarks["Date_Naim"].Range.Text = mtbNaim.Text;
+            oDoc.Bookmarks["FIO_Dir1"].Range.Text = FIODir;
+            oDoc.Bookmarks["FIO_Dir2"].Range.Text = FIODir;
+            oDoc.Bookmarks["Dolj_Dir"].Range.Text = DoljDir;
+            oDoc.Bookmarks["Orzaniz"].Range.Text = company;
+            oDoc.Bookmarks["Date"].Range.Text = date;
             // если нужно заменять другие закладки, тогда копируем верхнюю строку изменяя на нужные параметры 
 
         }

@@ -108,5 +108,11 @@ namespace DryCleaning
                 "\r\n\r\nЭта программа представляет собой информационную систему для предприятия \"Химчистка\"" +
                 "\r\n\r\nСоздано Андреем Ивановым. (C)2019";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FeedBackForm feedback = new FeedBackForm();
+            feedback.ShowDialog();
+        }
     }
 }
